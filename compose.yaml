@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db-movimientos:
+    image: 'postgres:17'
+    container_name: postgres_movimientos
+    restart: always
+    environment:
+      POSTGRES_DB: msmovimientos
+      POSTGRES_USER: tabango
+      POSTGRES_PASSWORD: Vaeceqd20.
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_movimientos_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  ms-movimientos:
+    build: .
+    container_name: ms-movimientos-app
+    restart: always
+    depends_on:
+      - db-movimientos
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_movimientos:5432/msmovimientos
+      SPRING_DATASOURCE_USERNAME: tabango
+      SPRING_DATASOURCE_PASSWORD: Vaeceqd20.
+      CLIENTE_SERVICE_URL: http://ms_cliente_app:8080
+    ports:
+      - "8081:8081"
+    networks:
+      - my_network
+
+volumes:
+  postgres_movimientos_data:
+
+networks:
+  my_network:
+    external: true

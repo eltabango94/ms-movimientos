@@ -1,0 +1,22 @@
+
+
+URL GET  http://localhost:8081/reportes?clienteId=1&fechaInicio=2025-02-01T00:00:00&fechaFin=2025-02-24T23:59:59
+
+URL POST http://localhost:8081/cuentas
+
+{
+"numeroCuenta": "58552344",
+"tipoCuenta": "CORRIENTE",
+"saldoInicial": 1000,
+"estado": true,
+"clienteId": 1
+}
+
+URL  POST  http://localhost:8081/movimientos
+{
+"numeroCuenta": "58552344",
+"tipoMovimiento": "RETIRO",
+"valor": 200.0,
+"saldo": 1000.0,
+"fecha": "2025-02-20T12:00:00"
+}
